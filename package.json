@@ -1,0 +1,15 @@
+{
+  "name": "submitter-nodejs",
+  "version": "1.0.0",
+  "description": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "M. Schnüriger",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.5.0",
+    "random-js": "^1.0.8"
+  }
+}
