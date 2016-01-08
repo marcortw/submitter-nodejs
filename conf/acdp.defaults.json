@@ -1,0 +1,38 @@
+{
+  "application": {
+    "applicationid": "Your unique application ID goes here",
+    "instanceid": {
+      "randomInstanceId": true
+    }
+  },
+  "protocols": {
+    "localConfigMode": {
+      "enabled": true,
+      "config": {
+        "dstHost": "your.hostname.domain",
+        "dstPort": "42000"
+      }
+    },
+    "dnsDiscoveryMode": {
+      "enabled": true
+    },
+    "multicastSenderMode": {
+      "enabled": true,
+      "config": {
+        "dstPort": 42000
+      }
+    },
+    "global": {
+      "timing": {
+        "exponentialBackoff": true,
+        "minDelayMs": 3000,
+        "maxDelayMs": 86400000,
+        "randomizationFactor": 0.5
+      }
+    }
+  },
+  "encryption": {
+  },
+  "demands": [
+  ]
+}

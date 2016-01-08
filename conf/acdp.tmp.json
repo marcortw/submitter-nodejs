@@ -1,0 +1,413 @@
+{
+  "application": {
+    "applicationid": "Your unique application ID goes here",
+    "instanceid": {
+      "randomInstanceId": true
+    }
+  },
+  "protocols": {
+    "localConfigMode": {
+      "enabled": true,
+      "config": {
+        "dstHost": "your.hostname.domain",
+        "dstPort": "42000"
+      }
+    },
+    "dnsDiscoveryMode": {
+      "enabled": true
+    },
+    "multicastSenderMode": {
+      "enabled": true,
+      "config": {
+        "dstPort": 42000
+      }
+    },
+    "global": {
+      "timing": {
+        "exponentialBackoff": true,
+        "minDelayMs": 3000,
+        "maxDelayMs": 86400000,
+        "randomizationFactor": 0.5
+      }
+    }
+  },
+  "encryption": {
+  }
+,
+  "demands": [
+    {
+      "submitter": {
+        "description": "Information about the submitter's specific implementation, i.e. the Framework verison",
+        "endpoint": {
+          "layer3Endpoint": {
+            "ipAddresses": [
+              "5.6.7.8",
+              "1.2.3.4/20"
+            ]
+          }
+        }
+      },
+      "demands": [
+        {
+          "producer": {
+            "description": "Listener for the default webservice interface",
+            "application": {
+              "applicationid": "123456789",
+              "instanceid": "567890",
+              "componentid": "component1",
+              "description": "This is a sample application"
+            },
+            "produces": [
+              {
+                "endpoint": {
+                  "layer4Endpoint": {
+                    "ports": [
+                      {
+                        "type": "TCP",
+                        "number": 8080
+                      },
+                      {
+                        "type": "TCP",
+                        "number": 8001
+                      }
+                    ]
+                  }
+                },
+                "endpoint": {
+                  "layer4Endpoint": {
+                    "ports": [
+                      {
+                        "type": "TCP",
+                        "number": 443
+                      },
+                      {
+                        "type": "TCP",
+                        "number": 80
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "forConsumers": [
+              {
+                "endpoint": {
+                  "layer7Endpoint": {
+                    "applications": [
+                      {
+                        "application": {
+                          "applicationid": "987654321"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "consumer": {
+            "description": "consumption of the google apis",
+            "application": {
+              "applicationid": "123456789",
+              "instanceid": "567890",
+              "componentid": "component1",
+              "description": "This is a sample application"
+            },
+            "consumes": [
+              {
+                "endpoint": {
+                  "layer4Endpoint": {
+                    "ports": [
+                      {
+                        "type": "TCP",
+                        "number": 443
+                      },
+                      {
+                        "type": "TCP",
+                        "number": 80
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "fromProducers": [
+              {
+                "endpoint": {
+                  "layer7Endpoint": {
+                    "applications": [
+                      {
+                        "application": {
+                          "applicationid": "987654321"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "submitter": {
+        "description": "Information about the submitter's specific implementation, i.e. the Framework verison",
+        "endpoint": {
+          "layer3Endpoint": {
+            "ipAddresses": [
+              "5.6.7.8",
+              "1.2.3.4/20"
+            ]
+          }
+        }
+      },
+      "demands": [
+        {
+          "producer": {
+            "description": "Listener for the default webservice interface",
+            "application": {
+              "applicationid": "123456789",
+              "instanceid": "567890",
+              "componentid": "component1",
+              "description": "This is a sample application"
+            },
+            "produces": [
+              {
+                "endpoint": {
+                  "layer4Endpoint": {
+                    "ports": [
+                      {
+                        "type": "TCP",
+                        "number": 8080
+                      },
+                      {
+                        "type": "TCP",
+                        "number": 8001
+                      }
+                    ]
+                  }
+                },
+                "endpoint": {
+                  "layer4Endpoint": {
+                    "ports": [
+                      {
+                        "type": "TCP",
+                        "number": 443
+                      },
+                      {
+                        "type": "TCP",
+                        "number": 80
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "forConsumers": [
+              {
+                "endpoint": {
+                  "layer7Endpoint": {
+                    "applications": [
+                      {
+                        "application": {
+                          "applicationid": "987654321"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "submitter": {
+        "description": "Information about the submitter's specific implementation, i.e. the Framework verison",
+        "endpoint": {
+          "layer3Endpoint": {
+            "ipAddresses": [
+              "5.6.7.8",
+              "1.2.3.4/20"
+            ]
+          }
+        }
+      },
+      "demands": [
+        {
+          "consumer": {
+            "description": "consumption of the google apis",
+            "application": {
+              "applicationid": "123456789",
+              "instanceid": "567890",
+              "componentid": "component1",
+              "description": "This is a sample application"
+            },
+            "consumes": [
+              {
+                "endpoint": {
+                  "layer4Endpoint": {
+                    "ports": [
+                      {
+                        "type": "TCP",
+                        "number": 443
+                      },
+                      {
+                        "type": "TCP",
+                        "number": 80
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "fromProducers": [
+              {
+                "endpoint": {
+                  "layer7Endpoint": {
+                    "applications": [
+                      {
+                        "application": {
+                          "applicationid": "987654321"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "submitter": {
+        "description": "Information about the submitter's specific implementation, i.e. the Framework verison"
+      },
+      "demands": [
+        {
+          "producer": {
+            "description": "Listener for the default webservice interface",
+            "application": {
+              "applicationid": "123456789",
+              "instanceid": "567890",
+              "componentid": "component1",
+              "description": "This is a sample application"
+            },
+            "produces": [
+              {
+                "endpoint": {
+                  "layer4Endpoint": {
+                    "ports": [
+                      {
+                        "type": "TCP",
+                        "number": 8080
+                      },
+                      {
+                        "type": "TCP",
+                        "number": 8001
+                      }
+                    ]
+                  }
+                },
+                "endpoint": {
+                  "layer4Endpoint": {
+                    "ports": [
+                      {
+                        "type": "TCP",
+                        "number": 443
+                      },
+                      {
+                        "type": "TCP",
+                        "number": 80
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "forConsumers": [
+              {
+                "endpoint": {
+                  "layer7Endpoint": {
+                    "applications": [
+                      {
+                        "application": {
+                          "applicationid": "987654321"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "consumer": {
+            "description": "consumption of the google apis",
+            "application": {
+              "applicationid": "123456789",
+              "instanceid": "567890",
+              "componentid": "component1",
+              "description": "This is a sample application"
+            },
+            "consumes": [
+              {
+                "endpoint": {
+                  "layer4Endpoint": {
+                    "ports": [
+                      {
+                        "type": "TCP",
+                        "number": 443
+                      },
+                      {
+                        "type": "TCP",
+                        "number": 80
+                      }
+                    ]
+                  }
+                }
+              }
+            ],
+            "fromProducers": [
+              {
+                "endpoint": {
+                  "layer7Endpoint": {
+                    "applications": [
+                      {
+                        "application": {
+                          "applicationid": "987654321"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "submitter": {
+        "description": "Information about the submitter's specific implementation, i.e. the Framework verison",
+        "endpoint": {
+          "layer3Endpoint": {
+            "ipAddresses": [
+              "1.2.3.4"
+            ]
+          }
+        }
+      },
+      "demands": [
+        {
+        }
+      ]
+    }
+  ]
+}

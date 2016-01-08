@@ -1,21 +1,63 @@
+var logger = require('./lib/logger.js');
+var acdpinit = require('./lib/init.js');
+var Demand = require('./lib/Demand.js');
+//var api = require('./lib/api.js');
+
+var Acdp = function () {
+    var agentVersion = require('./package.json').version
+    logger.info("Starting ACDP Submitter for Node.js version %s.", agentVersion);
+
+    acdpinit.initialize();
+};
+
+produce = function (endpoints, forConsumers) {
+    console.log('Produce in api!');
+};
+
 /**
- * Created by mschnueriger on 30.12.2015.
+ *
+ * @param endpoints
+ * @param fromProducers Array
+ * @param description
  */
-var multicastSender = require('./senders/multicast.js');
-var unicastSender = require('./senders/unicast.js');
+consumeSpecific = function (endpoints, fromProducers, description) {
+    console.log('Consume in api! Endpoints:' + JSON.stringify(endpoints));
+    var demand = new Demand();
+    demand.consumer = {
+        'description': description,
+        'consumes': [],
+        'fromProducers': []
+    };
+    //var objProducer = Demand.defineProp(demand, 'producer', {
+    //    'description': description,
+    //    'produces': [],
+    //    'forConsumers': []
+    //});
+    //demand.consumer.consumes = [];
+    demand.consumer.consumes.push({'endpoint': {'layer4Endpoint': {'ports': [endpoints]}}});
 
-var news = [
-    "Borussia Dortmund wins German championship",
-    "Tornado warning for the Bay Area",
-    "More rain for the weekend",
-    "Android tablets take over the world",
-    "iPad2 sold out",
-    "Nation's rappers down to last two samples"
-];
 
+};
 
-setInterval(function() { multicastSender.send(randomMessage()) }, 3000);
+consumePattern = function (pattern) {
+    //var demandA = new Demand();
+    //Demand.showCount();
+    //Demand.defineProp(demandA,"a","b");
+    //demandA.defineProp(demandA,"a","b");
 
-function randomMessage() {
-    return message = new Buffer(news[Math.floor(Math.random() * news.length)]);
-}
+    //var demandB = new Demand();
+    //demandB.defineProp(demandB,"c","d");
+
+};
+
+consumeApplication = function (application) {
+
+};
+
+module.exports = {
+    Acdp: new Acdp,
+    consumeSpecific: consumeSpecific,
+    consumePattern: consumePattern,
+    consumeApplication: consumeApplication,
+    produce: produce
+};
