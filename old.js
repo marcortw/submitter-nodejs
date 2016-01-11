@@ -25,7 +25,7 @@ var news = [
 
 
 setInterval(function () {
-    multicastSender.send(randomMessage())
+    multicastSender.sendMulticast(randomMessage())
 }, 3000);
 
 function randomMessage() {

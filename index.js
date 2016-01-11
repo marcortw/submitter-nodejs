@@ -1,6 +1,7 @@
 var logger = require('./lib/logger.js');
 var acdpinit = require('./lib/init.js');
 var Demand = require('./lib/Demand.js');
+var classifier = require('./lib/classifier');
 //var api = require('./lib/api.js');
 
 var Acdp = function () {
@@ -22,11 +23,24 @@ produce = function (endpoints, forConsumers) {
  */
 consumeSpecific = function (endpoints, fromProducers, description) {
     console.log('Consume in api! Endpoints:' + JSON.stringify(endpoints));
-    var demand = new Demand();
-    demand.consumer = {
-        'description': description,
-        'consumes': [],
-        'fromProducers': []
+
+    endpoints.forEach(function(entry) {
+        try{
+            var retObj = classifier.validateShorthand(entry);
+            logger.debug(JSON.stringify(retObj));
+        }
+        catch(err){
+            logger.error(err.message);
+        }
+    });
+
+    var dObj = new Demand();
+    dObj.demand = {
+        'consumer': {
+            'description': description,
+            'consumes': [],
+            'fromProducers': []
+        }
     };
     //var objProducer = Demand.defineProp(demand, 'producer', {
     //    'description': description,
@@ -34,8 +48,12 @@ consumeSpecific = function (endpoints, fromProducers, description) {
     //    'forConsumers': []
     //});
     //demand.consumer.consumes = [];
-    demand.consumer.consumes.push({'endpoint': {'layer4Endpoint': {'ports': [endpoints]}}});
-
+    dObj.demand.consumer.consumes.push({'endpoint': {'layer4Endpoint': {'ports': [endpoints]}}});
+    var result =  dObj.validateAndSend(function(err, results){
+       if(err){
+           logger.error('Problem encountered at Demand creation.');
+       }
+    });
 
 };
 

@@ -6,20 +6,26 @@
     }
   },
   "protocols": {
-    "localConfigMode": {
-      "enabled": true,
-      "config": {
-        "dstHost": "your.hostname.domain",
-        "dstPort": "42000"
+    "unicast": {
+      "localConfigMode": {
+        "enabled": false,
+        "config": {
+          "dstHost": "your.hostname.domain",
+          "dstPort": "42000"
+        }
+      },
+      "dnsDiscoveryMode": {
+        "enabled": false,
+        "autoSearchDomain": false,
+        "manualSearchDomain": "your.domain"
       }
     },
-    "dnsDiscoveryMode": {
-      "enabled": true
-    },
-    "multicastSenderMode": {
-      "enabled": true,
-      "config": {
-        "dstPort": 42000
+    "multicast": {
+      "multicastSenderMode": {
+        "enabled": true,
+        "config": {
+          "dstPort": 42000
+        }
       }
     },
     "global": {
