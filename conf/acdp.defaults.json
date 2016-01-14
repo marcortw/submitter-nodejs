@@ -1,8 +1,16 @@
 {
+  "submitter": {
+    "version": "Node.js ACDP submitter agent ALPHA 0.0.1"
+  },
   "application": {
-    "applicationid": "Your unique application ID goes here",
+    "description": "My application's description",
+    "applicationid": {
+      "value": "Your unique application ID goes here",
+      "random": false
+    },
     "instanceid": {
-      "randomInstanceId": true
+      "random": true,
+      "value":"instance id if not random"
     }
   },
   "protocols": {
