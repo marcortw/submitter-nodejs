@@ -20,7 +20,7 @@ var news = [
     "Android tablets take over the world",
     "iPad2 sold out",
     "Nation's rappers down to last two samples",
-    fs.readFileSync('C:/Users/mschnueriger/Documents/Oxford/MSc/Thesis/objects/Demand.v4.good.4.json', 'utf8')
+    fs.readFileSync('C:/Users/mschnueriger/Documents/Oxford/MSc/Thesis/objects/Request.v4.good.4.json', 'utf8')
 ];
 
 

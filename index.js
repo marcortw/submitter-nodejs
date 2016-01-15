@@ -1,13 +1,15 @@
-var url = require('url');
 var async = require('async');
+var constants = require('./lib/constants');
 var logger = require('./lib/logger.js');
 var acdpinit = require('./lib/init.js');
-var Demand = require('./lib/Demand.js');
+var Request = require('./lib/model/Request.js');
 var classifier = require('./lib/classifier');
 var Consumer = require('./lib/model/Consumer');
 var Producer = require('./lib/model/Producer');
 var L3ep = require('./lib/model/Layer3Endpoint');
 var L4ep = require('./lib/model/Layer4Endpoint');
+var L7ep = require('./lib/model/Layer7Endpoint');
+var config = require('./lib/configloader');
 
 
 //var api = require('./lib/api.js');
@@ -16,8 +18,8 @@ var Acdp = function () {
     var agentVersion = require('./package.json').version
     logger.info("Starting ACDP Submitter for Node.js version %s.", agentVersion);
 
-    acdpinit.initialize(function(err,result){
-        if(err){
+    acdpinit.initialize(function (err, result) {
+        if (err) {
             logger.error(err)
         } else {
             logger.info('ACDP initialization successful');
@@ -51,36 +53,36 @@ consumeSpecific = function (endpoints, fromProducers, description) {
     var consumerObj = new Consumer();
     consumerObj.addProducer()
 
-    var dObj = new Demand();
-    dObj.demand = {
+    var dObj = new Request();
+    dObj.request = {
         'consumer': {
             'description': description,
             'consumes': [],
             'fromProducers': []
         }
     };
-    //var objProducer = Demand.defineProp(demand, 'producer', {
+    //var objProducer = Request.defineProp(demand, 'producer', {
     //    'description': description,
     //    'produces': [],
     //    'forConsumers': []
     //});
     //demand.consumer.consumes = [];
-    dObj.demand.consumer.consumes.push({'endpoint': {'layer4Endpoint': {'ports': [endpoints]}}});
+    dObj.request.consumer.consumes.push({'endpoint': {'layer4Endpoint': {"applications": [endpoints]}}});
     var result = dObj.validateAndSend(function (err, results) {
         if (err) {
-            logger.error('Problem encountered at Demand creation.');
+            logger.error('Problem encountered at Request creation.');
         }
     });
 
 };
 
 consumePattern = function (pattern) {
-    //var demandA = new Demand();
-    //Demand.showCount();
-    //Demand.defineProp(demandA,"a","b");
+    //var demandA = new Request();
+    //Request.showCount();
+    //Request.defineProp(demandA,"a","b");
     //demandA.defineProp(demandA,"a","b");
 
-    //var demandB = new Demand();
+    //var demandB = new Request();
     //demandB.defineProp(demandB,"c","d");
 
 };
@@ -89,17 +91,33 @@ consumeApplication = function (application) {
 
 };
 
-consume = function (values, callback) {
-    if (values.constructor === Array) {
-        values.forEach(function (entry) {
-            parse(entry);
+consume = function (acdpShorthands, callback) {
+    var reqObj = new Request();
+
+    if (acdpShorthands.constructor === Array) {
+        acdpShorthands.forEach(function (acdpShorthand) {
+            parse(acdpShorthand, function (err, consumerOrProducer) {
+                if (err) {
+                    logger.error(err);
+                    if (callback) callback(err)
+                } else {
+                    reqObj.addDemand(consumerOrProducer);
+                }
+            });
         });
     } else {
         console.log('single obj');
-        parse(values);
+        parse(acdpShorthands, function (err, consumerOrProducer) {
+            if (err) {
+                logger.error(err);
+                if (callback) callback(err)
+            } else {
+                reqObj.addDemand(consumerOrProducer);
+            }
+        });
     }
 
-    function parse(shorthand) {
+    function parse(shorthand, callback) {
         logger.debug(Object.keys(shorthand).length);
         if (Object.keys(shorthand).length > 2) {
             throw new Error('Invalid number of key-value pairs');
@@ -111,58 +129,32 @@ consume = function (values, callback) {
                 var value = shorthand[key];
                 switch (key.toUpperCase()) {
                     case "URL":
-                        var urlParts = url.parse(value);
-                        async.parallel([
-                            function (callback) {
-                                var l3obj = new L3ep();
-                                classifier.validateIp(value, function (err, res) {
-                                    if (err) {
-                                        l3obj.addFqdName(urlParts.hostname)
-                                    } else {
-                                        l3obj.addIpAddr(urlParts.hostname)
-                                    }
-                                    return;
-
-                                });
-                                callback(null, l3obj);
-                            },
-                            function (callback) {
-                                if (urlParts.protocol = 'https:' && urlParts.port == null) {
-                                    urlParts.port = 443;
-                                }
-                                if (urlParts.protocol = 'http:' && urlParts.port == null) {
-                                    urlParts.port = 80;
-                                }
-                                var l4obj = new L4ep();
-                                l4obj.addPort('TCP', urlParts.port);
-                                callback(null, l4obj);
-                            }
-                        ], function (err, result) {
+                        classifier.objectsFromUrl(value, function (err, results) {
                             if (err) {
-                                logger.error(err);
-                                if (callback) callback(err, null);
+                                callback(err, null);
                             } else {
-                                var l3Obj = result[0];
-                                var l4Obj = result[1];
-
+                                var l3Obj = results[0];
+                                var l4Obj = results[1];
                                 var consObj = new Consumer();
                                 consObj.addProducer(l3Obj);
                                 consObj.addProduct(l4Obj);
-
-                                var dmndObj = new Demand(consObj);
-                                dmndObj.validateAndSend();
-
-
-                                if (callback) callback(null, result); // TODO: Demand instead of result
+                                callback(null, consObj);
                             }
-
                         });
-
-
                         break;
 
 
                     case "APP":
+                        var l4Obj = new L4ep();
+                        l4Obj.addSpecial(constants.SPECIAL_ANY);
+
+                        var l7Obj = new L7ep();
+                        l7Obj.addApplication(value)
+
+                        var consObj = new Consumer();
+                        consObj.addProduct(l4Obj);
+                        consObj.addProducer(l7Obj);
+                        callback(null, consObj);
                         break;
 
 
@@ -171,11 +163,13 @@ consume = function (values, callback) {
 
                     case "FOR":
                     case "FROM":
-                        if (callback) callback(new Error('The "FROM" object can only be used together with another key.'), null);
+                        if (callback) callback(new Error('The "FOR" and "FROM" keys can only be used together with another key.'), null);
                         break;
 
                     default:
-                        if (callback) callback(new Error('Invalid key supplied: ' + key), null);
+                        var errMsg = 'Invalid key supplied: ' + key;
+                        logger.error(errMsg);
+                        if (callback) callback(new Error(errMsg), null);
                 }
             }
         }
@@ -184,26 +178,17 @@ consume = function (values, callback) {
         if (Object.keys(shorthand).length == 2) {
 
         }
-
-
-        //for (var key in shorthand) {
-        //    var value = shorthand[key];
-        //
-        //    switch (key.toUpperCase()) {
-        //        case "TCP":
-        //        case "UDP":
-        //            classifier.validatePort(value);
-        //            break;
-        //        default:
-        //
-        //    }
-        //
-        //    logger.debug('key: ' + key + ' / val: ' + value);
-        //}
     }
 
-}
-;
+    reqObj.validateAndSend(function (err, result) {
+        if (err) {
+            logger.error(err)
+            if (callback) callback(err, null);
+        } else {
+            if (callback) callback(null, result);
+        }
+    })
+};
 
 module.exports = {
     Acdp: new Acdp,

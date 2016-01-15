@@ -60,8 +60,8 @@
             "produces": [
               {
                 "endpoint": {
-                  "layer4Endpoint": {
-                    "ports": [
+                  "layer7Endpoint": {
+                    "applications": [
                       {
                         "type": "TCP",
                         "number": 8080
@@ -74,8 +74,8 @@
                   }
                 },
                 "endpoint": {
-                  "layer4Endpoint": {
-                    "ports": [
+                  "layer7Endpoint": {
+                    "applications": [
                       {
                         "type": "TCP",
                         "number": 443
@@ -118,8 +118,8 @@
             "consumes": [
               {
                 "endpoint": {
-                  "layer4Endpoint": {
-                    "ports": [
+                  "layer7Endpoint": {
+                    "applications": [
                       {
                         "type": "TCP",
                         "number": 443
@@ -177,8 +177,8 @@
             "produces": [
               {
                 "endpoint": {
-                  "layer4Endpoint": {
-                    "ports": [
+                  "layer7Endpoint": {
+                    "applications": [
                       {
                         "type": "TCP",
                         "number": 8080
@@ -191,8 +191,8 @@
                   }
                 },
                 "endpoint": {
-                  "layer4Endpoint": {
-                    "ports": [
+                  "layer7Endpoint": {
+                    "applications": [
                       {
                         "type": "TCP",
                         "number": 443
@@ -250,8 +250,8 @@
             "consumes": [
               {
                 "endpoint": {
-                  "layer4Endpoint": {
-                    "ports": [
+                  "layer7Endpoint": {
+                    "applications": [
                       {
                         "type": "TCP",
                         "number": 443
@@ -301,8 +301,8 @@
             "produces": [
               {
                 "endpoint": {
-                  "layer4Endpoint": {
-                    "ports": [
+                  "layer7Endpoint": {
+                    "applications": [
                       {
                         "type": "TCP",
                         "number": 8080
@@ -315,8 +315,8 @@
                   }
                 },
                 "endpoint": {
-                  "layer4Endpoint": {
-                    "ports": [
+                  "layer7Endpoint": {
+                    "applications": [
                       {
                         "type": "TCP",
                         "number": 443
@@ -359,8 +359,8 @@
             "consumes": [
               {
                 "endpoint": {
-                  "layer4Endpoint": {
-                    "ports": [
+                  "layer7Endpoint": {
+                    "applications": [
                       {
                         "type": "TCP",
                         "number": 443
