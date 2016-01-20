@@ -135,7 +135,7 @@ var producerParser = function (shorthand, callback) {
                         callback(null, consObj);
                         break;
                     default:
-                        var errMsg = 'Invalid key supplied: ' + key;
+                        var errMsg = 'Invalid shorthand notation: ' + JSON.stringify(shorthand);
                         logger.error(errMsg);
                         if (callback) callback(new Error(errMsg), null);
                 }
@@ -213,6 +213,11 @@ var consumerParser = function (shorthand, callback) {
                         consObj.addProducer(result.l3ep);
                         consObj.addProduct(l4ep);
                         callback(null, consObj);
+                        break
+                    default:
+                        var errMsg = 'Invalid shorthand notation: ' + JSON.stringify(shorthand);
+                        logger.error(errMsg);
+                        if (callback) callback(new Error(errMsg), null);
                 }
             }
         });

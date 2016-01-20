@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d3d1287-93ba-41f4-aea3-6603aaf0f018" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/schema/combined.schema.v6.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/acdpDraft01.js" afterPath="$PROJECT_DIR$/lib/acdpDraft01.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/discovery/localconfig.js" afterPath="$PROJECT_DIR$/lib/discovery/localconfig.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/discovery/multicast.js" afterPath="$PROJECT_DIR$/lib/discovery/multicast.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testapp2.js" afterPath="$PROJECT_DIR$/testapp2.js" />
     </list>
     <ignored path="submitter-nodejs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,18 +52,8 @@
       <file leaf-file-name="index.js" pinned="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64021164">
-              <caret line="44" column="60" selection-start-line="44" selection-start-column="60" selection-end-line="44" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="senderHandling.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/senderHandling.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="46" selection-start-line="5" selection-start-column="46" selection-end-line="5" selection-end-column="46" />
+            <state vertical-scroll-proportion="1.1796644">
+              <caret line="139" column="72" selection-start-line="139" selection-start-column="72" selection-end-line="139" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -73,31 +69,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="configloader.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/configloader.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="30" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="testapp2.js" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testapp2.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="1" column="36" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testapp3.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testapp3.js">
+      <file leaf-file-name="multicast.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/discovery/multicast.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="44" column="45" selection-start-line="23" selection-start-column="64" selection-end-line="44" selection-end-column="45" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="localconfig.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/discovery/localconfig.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="acdpDraft01.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/acdpDraft01.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="combined.schema.v6.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/schema/combined.schema.v6.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.548388">
+              <caret line="43" column="24" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -139,8 +155,6 @@
         <option value="$PROJECT_DIR$/lib/configger.js" />
         <option value="$PROJECT_DIR$/lib/configloader.js" />
         <option value="$PROJECT_DIR$/conf/acdp.config.json" />
-        <option value="$PROJECT_DIR$/lib/discovery/multicast.js" />
-        <option value="$PROJECT_DIR$/lib/discovery/localconfig.js" />
         <option value="$PROJECT_DIR$/conf/acdp.overrides.json" />
         <option value="$PROJECT_DIR$/senders/multicast.js" />
         <option value="$PROJECT_DIR$/lib/tmp.js" />
@@ -169,7 +183,6 @@
         <option value="$PROJECT_DIR$/lib/model/Request.js" />
         <option value="$PROJECT_DIR$/lib/classifier.js" />
         <option value="$PROJECT_DIR$/lib/model/Layer7Endpoint.js" />
-        <option value="$PROJECT_DIR$/lib/acdpDraft01.js" />
         <option value="$PROJECT_DIR$/lib/model/Special.js" />
         <option value="$PROJECT_DIR$/lib/model/Layer4Endpoint.js" />
         <option value="$PROJECT_DIR$/lib/model/Producer.js" />
@@ -177,6 +190,9 @@
         <option value="$PROJECT_DIR$/lib/constants.js" />
         <option value="$PROJECT_DIR$/testapp3.js" />
         <option value="$PROJECT_DIR$/lib/senderHandling.js" />
+        <option value="$PROJECT_DIR$/lib/discovery/multicast.js" />
+        <option value="$PROJECT_DIR$/lib/discovery/localconfig.js" />
+        <option value="$PROJECT_DIR$/lib/acdpDraft01.js" />
         <option value="$PROJECT_DIR$/testapp2.js" />
         <option value="$PROJECT_DIR$/index.js" />
       </list>
@@ -269,7 +285,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="node_modules" />
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="submitter-nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="submitter-nodejs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="schema" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -303,19 +337,19 @@
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs" />
-      <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\lib\model" />
-      <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\conf" />
-      <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\lib" />
-      <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\lib\config" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\lib\model" />
       <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\lib" />
       <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\conf" />
       <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs" />
       <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\lib\config" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\lib\schema" />
+      <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs" />
+      <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\lib\model" />
+      <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\conf" />
+      <recent name="C:\Users\mschnueriger\Documents\dev\masterthesis\submitter-nodejs\lib" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.testapp2.js">
@@ -431,11 +465,11 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3252595" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26033935" sideWeight="0.5038251" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25121108" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25121108" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24953887" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42906573" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42906573" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -465,7 +499,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/index.js</url>
-          <line>380</line>
+          <line>385</line>
           <option name="timeStamp" value="139" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -485,7 +519,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/index.js</url>
-          <line>348</line>
+          <line>353</line>
           <option name="timeStamp" value="178" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -493,8 +527,18 @@
           <line>58</line>
           <option name="timeStamp" value="179" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/testapp2.js</url>
+          <line>4</line>
+          <option name="timeStamp" value="180" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/index.js</url>
+          <line>314</line>
+          <option name="timeStamp" value="181" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="180" />
+      <option name="time" value="182" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -549,20 +593,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/nconf/lib/nconf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/discovery/localconfig.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/discovery/multicast.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -712,14 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/acdpDraft01.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/model/Producer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -806,18 +828,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/discovery/multicast.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/discovery/localconfig.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/schema/combined.schema.v6.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.548388">
+          <caret line="43" column="24" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/acdpDraft01.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/testapp2.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="36" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64021164">
-          <caret line="44" column="60" selection-start-line="44" selection-start-column="60" selection-end-line="44" selection-end-column="60" />
+        <state vertical-scroll-proportion="1.1796644">
+          <caret line="139" column="72" selection-start-line="139" selection-start-column="72" selection-end-line="139" selection-end-column="72" />
           <folding />
         </state>
       </provider>
