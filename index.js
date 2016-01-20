@@ -30,16 +30,19 @@ if (config.get('application:instanceid:random')) {
 // TODO: Load manual demands at startup (?)
 
 var produce = function (acdpShorthands, callback) {
-    starter(acdpShorthands, producerParser, function (err, result) {
-        if (err) {
-            if (callback) callback(err, null);
-        } else {
-            if (callback) callback(null, result);
-        }
-    });
+    if (typeof acdpShorthands === 'object' && value !== null) {
+        starter(acdpShorthands, producerParser, function (err, result) {
+            if (err) {
+                if (callback) callback(err, null);
+            } else {
+                if (callback) callback(null, result);
+            }
+        });
+    }
 };
 
 var consume = function (acdpShorthands, callback) {
+
     starter(acdpShorthands, consumerParser, function (err, result) {
         if (err) {
             if (callback) callback(err, null);
