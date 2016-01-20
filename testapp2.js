@@ -1,25 +1,5 @@
 var acdp = require('./index.js');
 var test = require('./testapp3.js');
-//acdp.consumeSpecific([{"blubb": 443}, {"TCP": "abc"}, {"TCP": 80}], [{"host": "www.google.com"}]);
-//acdp.produceSpecific([{"TCP": 443}, {"TCP": 80}]);
-//acdp.consumePattern({"url": "https://www.google.com:8080/443"});
-
-//acdp.consumePattern({"url": "http://www.google.com"});
-//acdp.consumeApplication({"id": "12399243885481-29299323"});
-
-//var interval = setInterval(function() {
-//    acdp.consumeSpecific([{"TCP": 443}, {"TCP": 80}], [{"host": "www.google.com"}]);
-//}, 10000);
-
-//Always single Array or single object
-
-//acdp.consume({"url": "https://www.google.com/aaa"}, function (err, result) {
-//    if (err) {
-//        console.log("Request invalid");
-//    } else {
-//        console.log(JSON.stringify(result));
-//    }
-//});
 
 //acdp.consume({"url": "http://www.protect7.com/"}); // OK
 acdp.consume({"url": "https://www.google.com:8080/aaa"}); //OK
