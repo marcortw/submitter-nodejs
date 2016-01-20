@@ -30,7 +30,7 @@ if (config.get('application:instanceid:random')) {
 // TODO: Load manual demands at startup (?)
 
 var produce = function (acdpShorthands, callback) {
-    if (typeof acdpShorthands === 'object' && value !== null) {
+    if (typeof acdpShorthands === 'object' && acdpShorthands !== null) {
         starter(acdpShorthands, producerParser, function (err, result) {
             if (err) {
                 if (callback) callback(err, null);
@@ -42,7 +42,7 @@ var produce = function (acdpShorthands, callback) {
 };
 
 var consume = function (acdpShorthands, callback) {
-    if (typeof acdpShorthands === 'object' && value !== null) {
+    if (typeof acdpShorthands === 'object' && acdpShorthands !== null) {
         starter(acdpShorthands, consumerParser, function (err, result) {
             if (err) {
                 if (callback) callback(err, null);
