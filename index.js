@@ -1,7 +1,6 @@
 var async = require('async');
 var constants = require('./lib/constants');
 var logger = require('./lib/logger.js');
-var acdpinit = require('./lib/init.js');
 var Request = require('./lib/model/Request.js');
 var classifier = require('./lib/classifier');
 var Consumer = require('./lib/model/Consumer');
@@ -10,21 +9,27 @@ var L3ep = require('./lib/model/Layer3Endpoint');
 var L4ep = require('./lib/model/Layer4Endpoint');
 var L7ep = require('./lib/model/Layer7Endpoint');
 var config = require('./lib/configloader');
+var uuid = require('node-uuid');
 
-var Acdp = function () {
-    var agentVersion = require('./package.json').version
-    logger.info("Starting ACDP Submitter for Node.js version %s.", agentVersion);
+var agentVersion = require('./package.json').version
+logger.info("Starting ACDP Submitter for Node.js version %s.", agentVersion);
 
-    acdpinit.initialize(function (err, result) {
-        if (err) {
-            logger.error(err)
-        } else {
-            logger.info('ACDP initialization successful');
-        }
-    });
-};
 
-produce = function (acdpShorthands, callback) {
+logger.debug(
+    'Loading ACDP-Submitter from %s',
+    __dirname
+);
+
+logger.debug("CONFIGURATION: " + JSON.stringify(config.get()));
+
+// set the instance id
+if (config.get('application:instanceid:random')) {
+    config.set('application:instanceid:value', uuid.v4());
+}
+
+// TODO: Load manual demands at startup (?)
+
+var produce = function (acdpShorthands, callback) {
     starter(acdpShorthands, producerParser, function (err, result) {
         if (err) {
             if (callback) callback(err, null);
@@ -34,7 +39,7 @@ produce = function (acdpShorthands, callback) {
     });
 };
 
-consume = function (acdpShorthands, callback) {
+var consume = function (acdpShorthands, callback) {
     starter(acdpShorthands, consumerParser, function (err, result) {
         if (err) {
             if (callback) callback(err, null);
@@ -44,7 +49,7 @@ consume = function (acdpShorthands, callback) {
     });
 };
 
-starter = function (acdpShorthands, parser, callback) {
+var starter = function (acdpShorthands, parser, callback) {
     var reqObj = new Request();
 
     if (acdpShorthands.constructor === Array) {
@@ -90,7 +95,7 @@ starter = function (acdpShorthands, parser, callback) {
     }
 };
 
-var producerParser = (function (shorthand, callback) {
+var producerParser = function (shorthand, callback) {
     if (Object.keys(shorthand).length > 2) {
         throw new Error('Invalid number of key-value pairs');
     }
@@ -167,9 +172,9 @@ var producerParser = (function (shorthand, callback) {
 
         });
     }
-});
+};
 
-var consumerParser = (function (shorthand, callback) {
+var consumerParser = function (shorthand, callback) {
     if (Object.keys(shorthand).length > 2) {
         throw new Error('Invalid number of key-value pairs');
     }
@@ -255,9 +260,9 @@ var consumerParser = (function (shorthand, callback) {
 
         });
     }
-});
+};
 
-function resolveShorthand(result, callback) {
+var resolveShorthand = function (result, callback) {
     for (var key in result) {
         var value = result[key];
         switch (key.toUpperCase()) {
@@ -345,7 +350,6 @@ function resolveShorthand(result, callback) {
                                     if (err) {
                                         callback(err)
                                     } else {
-                                        console.log(result);
                                         callback(null, result);
                                     }
                                 });
@@ -378,7 +382,6 @@ function resolveShorthand(result, callback) {
 }
 
 module.exports = {
-    Acdp: new Acdp,
     produce: produce,
     consume: consume
 };
