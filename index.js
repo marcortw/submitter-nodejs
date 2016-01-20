@@ -42,14 +42,15 @@ var produce = function (acdpShorthands, callback) {
 };
 
 var consume = function (acdpShorthands, callback) {
-
-    starter(acdpShorthands, consumerParser, function (err, result) {
-        if (err) {
-            if (callback) callback(err, null);
-        } else {
-            if (callback) callback(null, result);
-        }
-    });
+    if (typeof acdpShorthands === 'object' && value !== null) {
+        starter(acdpShorthands, consumerParser, function (err, result) {
+            if (err) {
+                if (callback) callback(err, null);
+            } else {
+                if (callback) callback(null, result);
+            }
+        });
+    }
 };
 
 var starter = function (acdpShorthands, parser, callback) {
