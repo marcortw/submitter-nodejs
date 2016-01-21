@@ -11,6 +11,9 @@ var L7ep = require('./lib/model/Layer7Endpoint');
 var config = require('./lib/configloader');
 var uuid = require('node-uuid');
 
+
+console.log(process.env.DEBUG);
+
 var agentVersion = require('./package.json').version
 logger.info('Starting ACDP Submitter for Node.js version %s.', agentVersion);
 
@@ -18,6 +21,8 @@ logger.debug(
     'Loading ACDP-Submitter from %s',
     __dirname
 );
+
+
 
 logger.debug("CONFIGURATION: " + JSON.stringify(config.get()));
 

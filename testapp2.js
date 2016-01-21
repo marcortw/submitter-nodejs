@@ -6,8 +6,8 @@ var acdp = require('./index.js');
 //    console.log(err);
 //});
 
-acdp.consume({"tcp": "aaa"});
-//acdp.consume({"url": "http://www.protect7.com/"}); // OK
+//acdp.consume({"tcp": "aaa"});
+acdp.consume({"url": "http://www.protect7.com/"}); // OK
 //acdp.consume({"url": "https://www.google.com:8080/aaa"}); //OK
 //acdp.consume({"fantasy":"valueWithout a meaning"}); //OK, fails
 //acdp.consume({"ip": "74.125.136.105", "tcp":80}); // OK
