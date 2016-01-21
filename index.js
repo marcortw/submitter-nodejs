@@ -12,8 +12,7 @@ var config = require('./lib/configloader');
 var uuid = require('node-uuid');
 
 var agentVersion = require('./package.json').version
-logger.info("Starting ACDP Submitter for Node.js version %s.", agentVersion);
-
+logger.info('Starting ACDP Submitter for Node.js version %s.', agentVersion);
 
 logger.debug(
     'Loading ACDP-Submitter from %s',
@@ -33,6 +32,7 @@ var produce = function (acdpShorthands, callback) {
     if (typeof acdpShorthands === 'object' && acdpShorthands !== null) {
         starter(acdpShorthands, producerParser, function (err, result) {
             if (err) {
+                logger.error(err)
                 if (callback) callback(err, null);
             } else {
                 if (callback) callback(null, result);
@@ -45,6 +45,7 @@ var consume = function (acdpShorthands, callback) {
     if (typeof acdpShorthands === 'object' && acdpShorthands !== null) {
         starter(acdpShorthands, consumerParser, function (err, result) {
             if (err) {
+                logger.error(err);
                 if (callback) callback(err, null);
             } else {
                 if (callback) callback(null, result);
@@ -68,7 +69,6 @@ var starter = function (acdpShorthands, parser, callback) {
             });
         }, function (err) {
             if (err) {
-                logger.error(err);
                 if (callback) callback(err)
             } else {
                 reqObj.validateAndSend(function (err, result) {
@@ -83,7 +83,6 @@ var starter = function (acdpShorthands, parser, callback) {
     } else {
         parser(acdpShorthands, function (err, consumerOrProducer) {
             if (err) {
-                logger.error(err);
                 if (callback) callback(err)
             } else {
                 reqObj.addDemand(consumerOrProducer);
@@ -136,7 +135,6 @@ var producerParser = function (shorthand, callback) {
                         break;
                     default:
                         var errMsg = 'Invalid shorthand notation: ' + JSON.stringify(shorthand);
-                        logger.error(errMsg);
                         if (callback) callback(new Error(errMsg), null);
                 }
             }
@@ -216,7 +214,6 @@ var consumerParser = function (shorthand, callback) {
                         break
                     default:
                         var errMsg = 'Invalid shorthand notation: ' + JSON.stringify(shorthand);
-                        logger.error(errMsg);
                         if (callback) callback(new Error(errMsg), null);
                 }
             }
@@ -306,23 +303,33 @@ var resolveShorthand = function (result, callback) {
                 break;
 
             case "TCP":
-                var l4Obj = new L4ep();
-                l4Obj.addPort(constants.TCP, value);
-                var retObj = {
-                    type: "PORT",
-                    l4ep: l4Obj
-                };
-                callback(null, retObj);
+                var parsedValue = parseInt(value, 10);
+                if (isNaN(parsedValue)) {
+                    callback(new Error("Value is not a number."));
+                } else {
+                    var l4Obj = new L4ep();
+                    l4Obj.addPort(constants.TCP, parseInt(value, 10));
+                    var retObj = {
+                        type: "PORT",
+                        l4ep: l4Obj
+                    };
+                    callback(null, retObj);
+                }
                 break;
 
             case "UDP":
-                var l4Obj = new L4ep();
-                l4Obj.addPort(constants.UDP, value);
-                var retObj = {
-                    type: "PORT",
-                    l4ep: l4Obj
-                };
-                callback(null, retObj);
+                var parsedValue = parseInt(value, 10);
+                if (isNaN(parsedValue)) {
+                    callback(new Error("Value is not a number."));
+                } else {
+                    var l4Obj = new L4ep();
+                    l4Obj.addPort(constants.UDP, parsedValue);
+                    var retObj = {
+                        type: "PORT",
+                        l4ep: l4Obj
+                    };
+                    callback(null, retObj);
+                }
                 break;
 
 
@@ -384,7 +391,6 @@ var resolveShorthand = function (result, callback) {
 
             default:
                 var errMsg = 'Invalid key supplied: ' + key;
-                logger.error(errMsg);
                 if (callback) callback(new Error(errMsg), null);
         }
     }

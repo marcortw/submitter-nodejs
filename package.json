@@ -11,6 +11,7 @@
   "dependencies": {
     "async": "^1.5.2",
     "backoff": "^2.4.1",
+    "debug": "^2.2.0",
     "dnscache": "0.0.4",
     "nconf": "^0.8.2",
     "node-uuid": "^1.4.7",

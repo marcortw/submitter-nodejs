@@ -2,7 +2,11 @@ var acdp = require('./index.js');
 //var test = require('./testapp3.js');
 
 
-acdp.consume({"tcp": "8000"});
+//acdp.produce({"tcp": "8000"}, function (err, result) {
+//    console.log(err);
+//});
+
+acdp.consume({"tcp": "aaa"});
 //acdp.consume({"url": "http://www.protect7.com/"}); // OK
 //acdp.consume({"url": "https://www.google.com:8080/aaa"}); //OK
 //acdp.consume({"fantasy":"valueWithout a meaning"}); //OK, fails
