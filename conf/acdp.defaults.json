@@ -3,23 +3,25 @@
     "version": "Node.js ACDP submitter agent ALPHA 0.0.1"
   },
   "application": {
-    "description": "My application's description",
+    "description": "Your application's description",
     "applicationid": {
       "value": "Your unique application ID goes here",
       "random": false
     },
     "instanceid": {
       "random": true,
-      "value":"instance id if not random"
+      "value": "instance id if not random"
     }
   },
   "protocols": {
     "unicast": {
       "localConfigMode": {
-        "enabled": false,
+        "enabled": true,
         "config": {
-          "dstHost": "your.hostname.domain",
-          "dstPort": "42000"
+          "dstProto": "http",
+          "dstHost": "localhost",
+          "dstPort": "42000",
+          "dstPath": "/"
         }
       },
       "dnsDiscoveryMode": {
@@ -30,9 +32,10 @@
     },
     "multicast": {
       "multicastSenderMode": {
-        "enabled": true,
+        "enabled": false,
         "config": {
-          "dstPort": 42000
+          "dstPort": 42000,
+          "dstAddr": "239.255.255.242"
         }
       }
     },

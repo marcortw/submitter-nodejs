@@ -1,6 +1,17 @@
+var logger = require('./lib/logger.js');
+
+var agentVersion = require('./package.json').version;
+logger.info('Starting ACDP Submitter for Node.js version %s.', agentVersion);
+
+logger.debug(
+    'Loading ACDP-Submitter from %s',
+    __dirname
+);
+
+
 var async = require('async');
 var constants = require('./lib/constants');
-var logger = require('./lib/logger.js');
+
 var Request = require('./lib/model/Request.js');
 var classifier = require('./lib/classifier');
 var Consumer = require('./lib/model/Consumer');
@@ -12,19 +23,7 @@ var config = require('./lib/configloader');
 var uuid = require('node-uuid');
 
 
-console.log(process.env.DEBUG);
-
-var agentVersion = require('./package.json').version
-logger.info('Starting ACDP Submitter for Node.js version %s.', agentVersion);
-
-logger.debug(
-    'Loading ACDP-Submitter from %s',
-    __dirname
-);
-
-
-
-logger.debug("CONFIGURATION: " + JSON.stringify(config.get()));
+logger.trace("CONFIGURATION: " + JSON.stringify(config.get()));
 
 // set the instance id
 if (config.get('application:instanceid:random')) {
@@ -114,7 +113,6 @@ var producerParser = function (shorthand, callback) {
             if (err) {
                 callback(err);
             } else {
-                logger.debug(result);
                 switch (result.type) {
                     case "PORT":
                         var consObj = new Producer();
@@ -192,7 +190,6 @@ var consumerParser = function (shorthand, callback) {
             if (err) {
                 callback(err);
             } else {
-                logger.debug(result);
                 switch (result.type) {
                     case "URL":
                         var consObj = new Consumer();
