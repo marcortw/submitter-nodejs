@@ -16,9 +16,9 @@ var Request = require('./lib/model/Request.js');
 var classifier = require('./lib/classifier');
 var Consumer = require('./lib/model/Consumer');
 var Producer = require('./lib/model/Producer');
-var L3ep = require('./lib/model/Layer3Endpoint');
-var L4ep = require('./lib/model/Layer4Endpoint');
-var L7ep = require('./lib/model/Layer7Endpoint');
+var L3ep = require('./lib/model/NetworkEndpoint');
+var L4ep = require('./lib/model/TransportEndpoint');
+var L7ep = require('./lib/model/ApplicationEndpoint');
 var config = require('./lib/configloader');
 var uuid = require('node-uuid');
 
@@ -36,7 +36,7 @@ var produce = function (acdpShorthands, callback) {
     if (typeof acdpShorthands === 'object' && acdpShorthands !== null) {
         starter(acdpShorthands, producerParser, function (err, result) {
             if (err) {
-                logger.error(err)
+                logger.error(err);
                 if (callback) callback(err, null);
             } else {
                 if (callback) callback(null, result);
@@ -113,9 +113,10 @@ var producerParser = function (shorthand, callback) {
             if (err) {
                 callback(err);
             } else {
+                var consObj = {};
                 switch (result.type) {
                     case "PORT":
-                        var consObj = new Producer();
+                        consObj = new Producer();
                         var l3ep = new L3ep();
                         l3ep.addSpecial({"type": constants.SPECIAL_UNKNOWN});
                         consObj.addConsumer(l3ep);
@@ -124,14 +125,14 @@ var producerParser = function (shorthand, callback) {
                         break;
                     case "APP":
                         result.l4ep.addSpecial(constants.SPECIAL_UNKNOWN); // do this because the caller only specified an App, no port
-                        var consObj = new Consumer();
+                        consObj = new Consumer();
                         consObj.addProduct(result.l4ep);
                         consObj.addProducer(result.l7ep);
                         callback(null, consObj);
                         break;
                     case "IP":
                         result.l4ep.addSpecial(constants.SPECIAL_UNKNOWN); // do this because the caller only specified an IP-Address
-                        var consObj = new Consumer();
+                        consObj = new Consumer();
                         consObj.addProducer(result.l3ep);
                         consObj.addProduct(result.l4ep);
                         callback(null, consObj);
@@ -190,15 +191,16 @@ var consumerParser = function (shorthand, callback) {
             if (err) {
                 callback(err);
             } else {
+                var consObj = {};
                 switch (result.type) {
                     case "URL":
-                        var consObj = new Consumer();
+                        consObj = new Consumer();
                         consObj.addProducer(result.l3ep);
                         consObj.addProduct(result.l4ep);
                         callback(null, consObj);
                         break;
                     case "APP":
-                        var consObj = new Consumer();
+                        consObj = new Consumer();
                         var l4ep = new L4ep();
                         l4ep.addSpecial(constants.SPECIAL_UNKNOWN); // do this because the caller only specified an App, no port
                         consObj.addProduct(l4ep);
@@ -206,14 +208,14 @@ var consumerParser = function (shorthand, callback) {
                         callback(null, consObj);
                         break;
                     case "IP":
-                        var consObj = new Consumer();
+                        consObj = new Consumer();
                         var l4ep = new L4ep();
                         l4ep.addSpecial(constants.SPECIAL_UNKNOWN); // do this because the caller only specified an IP-Address
 
                         consObj.addProducer(result.l3ep);
                         consObj.addProduct(l4ep);
                         callback(null, consObj);
-                        break
+                        break;
                     default:
                         var errMsg = 'Invalid shorthand notation: ' + JSON.stringify(shorthand);
                         if (callback) callback(new Error(errMsg), null);
@@ -396,7 +398,7 @@ var resolveShorthand = function (result, callback) {
                 if (callback) callback(new Error(errMsg), null);
         }
     }
-}
+};
 
 module.exports = {
     produce: produce,

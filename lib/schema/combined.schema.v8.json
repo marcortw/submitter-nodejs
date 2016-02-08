@@ -23,15 +23,15 @@
 				{
 					"properties": 
 					{
-						"layer3Endpoint": 
+						"networkEndpoint": 
 						{
-							"$ref": "#/definitions/layer3Endpoint"
+							"$ref": "#/definitions/networkEndpoint"
 						}
 					},
 					"additionalProperties": false,
 					"required": 
 					[
-						"layer3Endpoint"
+						"networkEndpoint"
 					]
 				}
 			},
@@ -123,6 +123,14 @@
 			"type": "object",
 			"properties": 
 			{
+				"id": 
+				{
+					"type": 
+					[
+						"number",
+						"string"
+					]
+				},
 				"description": 
 				{
 					"type": "string"
@@ -144,6 +152,7 @@
 			"additionalProperties": false,
 			"required": 
 			[
+				"id",
 				"application",
 				"produces",
 				"forConsumers"
@@ -154,6 +163,14 @@
 			"type": "object",
 			"properties": 
 			{
+				"id": 
+				{
+					"type": 
+					[
+						"number",
+						"string"
+					]
+				},
 				"description": 
 				{
 					"type": "string"
@@ -175,6 +192,7 @@
 			"additionalProperties": false,
 			"required": 
 			[
+				"id",
 				"application",
 				"consumes",
 				"fromProducers"
@@ -197,9 +215,9 @@
 							{
 								"properties": 
 								{
-									"layer4Endpoint": 
+									"transportEndpoint": 
 									{
-										"$ref": "#/definitions/layer4Endpoint"
+										"$ref": "#/definitions/transportEndpoint"
 									}
 								},
 								"additionalProperties": false
@@ -215,9 +233,9 @@
 							{
 								"properties": 
 								{
-									"layer7Endpoint": 
+									"applicationEndpoint": 
 									{
-										"$ref": "#/definitions/layer7Endpoint"
+										"$ref": "#/definitions/applicationEndpoint"
 									}
 								},
 								"additionalProperties": false
@@ -245,9 +263,9 @@
 							{
 								"properties": 
 								{
-									"layer4Endpoint": 
+									"transportEndpoint": 
 									{
-										"$ref": "#/definitions/layer4Endpoint"
+										"$ref": "#/definitions/transportEndpoint"
 									}
 								},
 								"additionalProperties": false
@@ -275,9 +293,9 @@
 							{
 								"properties": 
 								{
-									"layer3Endpoint": 
+									"networkEndpoint": 
 									{
-										"$ref": "#/definitions/layer3Endpoint"
+										"$ref": "#/definitions/networkEndpoint"
 									}
 								},
 								"additionalProperties": false
@@ -293,9 +311,9 @@
 							{
 								"properties": 
 								{
-									"layer7Endpoint": 
+									"applicationEndpoint": 
 									{
-										"$ref": "#/definitions/layer7Endpoint"
+										"$ref": "#/definitions/applicationEndpoint"
 									}
 								},
 								"additionalProperties": false
@@ -361,48 +379,48 @@
 				{
 					"properties": 
 					{
-						"layer3Endpoint": 
+						"networkEndpoint": 
 						{
-							"$ref": "#/definitions/layer3Endpoint"
+							"$ref": "#/definitions/networkEndpoint"
 						}
 					},
 					"additionalProperties": false,
 					"required": 
 					[
-						"layer3Endpoint"
+						"networkEndpoint"
 					]
 				},
 				{
 					"properties": 
 					{
-						"layer4Endpoint": 
+						"transportEndpoint": 
 						{
-							"$ref": "#/definitions/layer4Endpoint"
+							"$ref": "#/definitions/transportEndpoint"
 						}
 					},
 					"additionalProperties": false,
 					"required": 
 					[
-						"layer4Endpoint"
+						"transportEndpoint"
 					]
 				},
 				{
 					"properties": 
 					{
-						"layer7Endpoint": 
+						"applicationEndpoint": 
 						{
-							"$ref": "#/definitions/layer7Endpoint"
+							"$ref": "#/definitions/applicationEndpoint"
 						}
 					},
 					"additionalProperties": false,
 					"required": 
 					[
-						"layer7Endpoint"
+						"applicationEndpoint"
 					]
 				}
 			]
 		},
-		"layer3Endpoint": 
+		"networkEndpoint": 
 		{
 			"type": "object",
 			"oneOf": 
@@ -451,7 +469,7 @@
 				}
 			]
 		},
-		"layer4Endpoint": 
+		"transportEndpoint": 
 		{
 			"type": "object",
 			"oneOf": 
@@ -492,7 +510,7 @@
 				}
 			]
 		},
-		"layer7Endpoint": 
+		"applicationEndpoint": 
 		{
 			"type": "object"
 		},
