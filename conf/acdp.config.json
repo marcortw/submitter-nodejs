@@ -1,8 +1,0 @@
-{
-  "multicast": {
-    "dstPort": "42042"
-  },
-  "uservalue": {
-    "from": "user"
-  }
-}
