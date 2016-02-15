@@ -46,11 +46,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Node modules
-node_modules
 
 # =============
 # Custom Files
 # =============
-.idea/*
-.idea/workspace.xml
+.idea
+node_modules
