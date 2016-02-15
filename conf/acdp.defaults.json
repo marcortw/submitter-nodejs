@@ -16,7 +16,7 @@
   "protocols": {
     "unicast": {
       "localConfigMode": {
-        "enabled": true,
+        "enabled": false,
         "config": {
           "dstProto": "http",
           "dstHost": "localhost",
@@ -32,7 +32,7 @@
     },
     "multicast": {
       "multicastSenderMode": {
-        "enabled": false,
+        "enabled": true,
         "config": {
           "dstPort": 42000,
           "dstAddr": "239.255.255.242"
