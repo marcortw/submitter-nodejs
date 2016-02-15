@@ -32,7 +32,7 @@
     },
     "multicast": {
       "multicastSenderMode": {
-        "enabled": false
+        "enabled": true
       }
     },
     "global": {
