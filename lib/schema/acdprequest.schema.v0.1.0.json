@@ -1,5 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
+	"description": "ACDP Request schema which describes communication needs of a networked entity",
 	"type": "object",
 	"properties": 
 	{
@@ -12,6 +13,7 @@
 		},
 		"submitter": 
 		{
+			"description": "Describes the environment of the ACDP Submitter",
 			"type": "object",
 			"properties": 
 			{
@@ -39,7 +41,7 @@
 		},
 		"demands": 
 		{
-			"description": "A demand, consisting of any number of producers or consumers (WORKING)",
+			"description": "An array of ACDP Demands, consisting of any number of producers or consumers",
 			"type": "array",
 			"uniqueItems": true,
 			"minItems": 1,
@@ -76,50 +78,15 @@
 	"additionalProperties": false,
 	"required": 
 	[
+		"type",
 		"submitter",
 		"demands"
 	],
 	"definitions": 
 	{
-		"nullobject": 
-		{
-
-		},
-		"producer_or_consumer": 
-		{
-			"type": "object",
-			"oneOf": 
-			[
-				{
-					"properties": 
-					{
-						"producer": 
-						{
-							"$ref": "#/definitions/producer"
-						}
-					},
-					"additionalProperties": false,
-					"required": 
-					[
-						"producer"
-					],
-					"properties": 
-					{
-						"consumer": 
-						{
-							"$ref": "#/definitions/consumer"
-						}
-					},
-					"additionalProperties": false,
-					"required": 
-					[
-						"consumer"
-					]
-				}
-			]
-		},
 		"producer": 
 		{
+			"description": "Services which are produced for consumption by consumers",
 			"type": "object",
 			"properties": 
 			{
@@ -145,8 +112,7 @@
 				},
 				"forConsumers": 
 				{
-					"type": "array",
-					"minItems": 1
+					"$ref": "#/definitions/forConsumers"
 				}
 			},
 			"additionalProperties": false,
@@ -160,6 +126,7 @@
 		},
 		"consumer": 
 		{
+			"description": "Services which are consumed from producers",
 			"type": "object",
 			"properties": 
 			{
@@ -185,8 +152,7 @@
 				},
 				"fromProducers": 
 				{
-					"type": "array",
-					"minItems": 1
+					"$ref": "#/definitions/fromProducers"
 				}
 			},
 			"additionalProperties": false,
@@ -205,7 +171,7 @@
 			"minItems": 1,
 			"items": 
 			{
-				"anyOf": 
+				"oneOf": 
 				[
 					{
 						"type": "object",
@@ -220,10 +186,18 @@
 										"$ref": "#/definitions/transportEndpoint"
 									}
 								},
-								"additionalProperties": false
+								"additionalProperties": false,
+								"required": 
+								[
+									"transportEndpoint"
+								]
 							}
 						},
-						"additionalProperties": false
+						"additionalProperties": false,
+						"required": 
+						[
+							"endpoint"
+						]
 					},
 					{
 						"type": "object",
@@ -238,10 +212,18 @@
 										"$ref": "#/definitions/applicationEndpoint"
 									}
 								},
-								"additionalProperties": false
+								"additionalProperties": false,
+								"required": 
+								[
+									"applicationEndpoint"
+								]
 							}
 						},
-						"additionalProperties": false
+						"additionalProperties": false,
+						"required": 
+						[
+							"endpoint"
+						]
 					}
 				]
 			}
@@ -253,7 +235,7 @@
 			"minItems": 1,
 			"items": 
 			{
-				"anyOf": 
+				"oneOf": 
 				[
 					{
 						"type": "object",
@@ -268,10 +250,18 @@
 										"$ref": "#/definitions/transportEndpoint"
 									}
 								},
-								"additionalProperties": false
+								"additionalProperties": false,
+								"required": 
+								[
+									"transportEndpoint"
+								]
 							}
 						},
-						"additionalProperties": false
+						"additionalProperties": false,
+						"required": 
+						[
+							"endpoint"
+						]
 					}
 				]
 			}
@@ -283,7 +273,7 @@
 			"minItems": 1,
 			"items": 
 			{
-				"anyOf": 
+				"oneOf": 
 				[
 					{
 						"type": "object",
@@ -298,10 +288,18 @@
 										"$ref": "#/definitions/networkEndpoint"
 									}
 								},
-								"additionalProperties": false
+								"additionalProperties": false,
+								"required": 
+								[
+									"networkEndpoint"
+								]
 							}
 						},
-						"additionalProperties": false
+						"additionalProperties": false,
+						"required": 
+						[
+							"endpoint"
+						]
 					},
 					{
 						"type": "object",
@@ -316,10 +314,82 @@
 										"$ref": "#/definitions/applicationEndpoint"
 									}
 								},
-								"additionalProperties": false
+								"additionalProperties": false,
+								"required": 
+								[
+									"applicationEndpoint"
+								]
 							}
 						},
-						"additionalProperties": false
+						"additionalProperties": false,
+						"required": 
+						[
+							"endpoint"
+						]
+					}
+				]
+			}
+		},
+		"fromProducers": 
+		{
+			"type": "array",
+			"uniqueItems": true,
+			"minItems": 1,
+			"items": 
+			{
+				"oneOf": 
+				[
+					{
+						"type": "object",
+						"properties": 
+						{
+							"endpoint": 
+							{
+								"properties": 
+								{
+									"networkEndpoint": 
+									{
+										"$ref": "#/definitions/networkEndpoint"
+									}
+								},
+								"additionalProperties": false,
+								"required": 
+								[
+									"networkEndpoint"
+								]
+							}
+						},
+						"additionalProperties": false,
+						"required": 
+						[
+							"endpoint"
+						]
+					},
+					{
+						"type": "object",
+						"properties": 
+						{
+							"endpoint": 
+							{
+								"properties": 
+								{
+									"applicationEndpoint": 
+									{
+										"$ref": "#/definitions/applicationEndpoint"
+									}
+								},
+								"additionalProperties": false,
+								"required": 
+								[
+									"applicationEndpoint"
+								]
+							}
+						},
+						"additionalProperties": false,
+						"required": 
+						[
+							"endpoint"
+						]
 					}
 				]
 			}
@@ -374,6 +444,7 @@
 		"endpoint": 
 		{
 			"type": "object",
+			"description": "UNUSED",
 			"oneOf": 
 			[
 				{
@@ -512,9 +583,46 @@
 		},
 		"applicationEndpoint": 
 		{
-			"type": "object"
+			"type": "object",
+			"oneOf": 
+			[
+				{
+					"properties": 
+					{
+						"applications": 
+						{
+							"type": "array",
+							"minItems": 1,
+							"uniqueItems": true,
+							"items": 
+							{
+								"$ref": "#/definitions/application"
+							}
+						}
+					},
+					"additionalProperties": false,
+					"required": 
+					[
+						"applications"
+					]
+				},
+				{
+					"properties": 
+					{
+						"special": 
+						{
+							"$ref": "#/definitions/special"
+						}
+					},
+					"additionalProperties": false,
+					"required": 
+					[
+						"special"
+					]
+				}
+			]
 		},
-		"customObject": 
+		"customEndpoint": 
 		{
 			"type": "object"
 		},
@@ -528,7 +636,8 @@
 					"enum": 
 					[
 						"TCP",
-						"UDP"
+						"UDP",
+						"SCTP"
 					]
 				},
 				"number": 
@@ -536,7 +645,12 @@
 					"type": "integer"
 				}
 			},
-			"additionalProperties": false
+			"additionalProperties": false,
+			"required": 
+			[
+				"type",
+				"number"
+			]
 		},
 		"special": 
 		{
@@ -553,7 +667,11 @@
 					]
 				}
 			},
-			"additionalProperties": false
+			"additionalProperties": false,
+			"required": 
+			[
+				"type"
+			]
 		},
 		"fqdNames": 
 		{
@@ -561,11 +679,9 @@
 			"minItems": 1,
 			"uniqueItems": true,
 			"items": 
-			[
-				{
-					"$ref": "#/definitions/fqdn"
-				}
-			]
+			{
+				"$ref": "#/definitions/fqdn"
+			}
 		},
 		"ipAddresses": 
 		{
@@ -579,7 +695,7 @@
 		},
 		"fqdn": 
 		{
-			"type": "string"
+			"$ref": "#/definitions/pattern_fqdn"
 		},
 		"ipAddress": 
 		{
@@ -610,6 +726,11 @@
 		{
 			"type": "string",
 			"pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])-(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+		},
+		"pattern_fqdn": 
+		{
+			"type": "string",
+			"pattern": "^([-*a-zA-Z0-9]{1,63}\\.)+$"
 		}
 	}
 }

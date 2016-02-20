@@ -1,6 +1,6 @@
 {
   "name": "submitter-nodejs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A draft implementation of a submitter for a protocol called ACDP",
   "main": "index.js",
   "scripts": {
