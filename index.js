@@ -23,12 +23,13 @@ var config = require('./lib/configloader');
 var uuid = require('node-uuid');
 
 
-logger.trace("CONFIGURATION: " + JSON.stringify(config.get()));
-
-// set the instance id
+// some config variables which need to be set at startup
 if (config.get('application:instanceid:random')) {
     config.set('application:instanceid:value', uuid.v4());
 }
+
+
+logger.trace("CONFIGURATION: " + JSON.stringify(config.get()));
 
 // TODO: Load manual demands at startup (?)
 
@@ -118,7 +119,7 @@ var producerParser = function (shorthand, callback) {
                     case "PORT":
                         consObj = new Producer();
                         var l3ep = new L3ep();
-                        l3ep.addSpecial({"type": constants.SPECIAL_UNKNOWN});
+                        l3ep.addSpecial(constants.SPECIAL_UNKNOWN);
                         consObj.addConsumer(l3ep);
                         consObj.addProduct(result.l4ep);
                         callback(null, consObj);
@@ -265,6 +266,7 @@ var consumerParser = function (shorthand, callback) {
                     callback(null, consObj);
                 }
 
+                // TODO: thrown with acdp.consume({"ip": "10.10.81.200", "tcp": 80});
                 callback(new Error("No allowed shorthand notation"));
             }
 
