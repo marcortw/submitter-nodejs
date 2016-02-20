@@ -243,7 +243,9 @@ var consumerParser = function (shorthand, callback) {
             if (err) {
                 callback(err)
             } else {
+                var valid = false;
                 if (objects.IP && objects.PORT) {
+                    valid = true;
                     var consObj = new Consumer();
                     consObj.addProduct(objects.PORT.l4ep);
                     consObj.addProducer(objects.IP.l3ep);
@@ -251,6 +253,7 @@ var consumerParser = function (shorthand, callback) {
                 }
 
                 if (objects.APP && objects.PORT) {
+                    valid = true;
                     var consObj = new Consumer();
                     consObj.addProduct(objects.PORT.l4ep);
                     consObj.addProducer(objects.APP.l7ep);
@@ -258,6 +261,7 @@ var consumerParser = function (shorthand, callback) {
                 }
 
                 if (objects.APP && objects.SPECIAL) {
+                    valid = true;
                     var consObj = new Consumer();
                     var l4ep = new L4ep();
                     l4ep.addSpecial(objects.SPECIAL.special);
@@ -266,8 +270,7 @@ var consumerParser = function (shorthand, callback) {
                     callback(null, consObj);
                 }
 
-                // TODO: thrown with acdp.consume({"ip": "10.10.81.200", "tcp": 80});
-                callback(new Error("No allowed shorthand notation"));
+                if(!valid) callback(new Error("No allowed shorthand notation"));
             }
 
         });

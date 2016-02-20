@@ -596,7 +596,18 @@
 							"uniqueItems": true,
 							"items": 
 							{
-								"$ref": "#/definitions/application"
+								"properties": 
+								{
+									"application": 
+									{
+										"$ref": "#/definitions/application"
+									}
+								},
+								"additionalProperties": false,
+								"required": 
+								[
+									"application"
+								]
 							}
 						}
 					},
