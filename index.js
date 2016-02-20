@@ -1,7 +1,8 @@
 var logger = require('./lib/logger.js');
 
 var agentVersion = require('./package.json').version;
-logger.info('Starting ACDP Submitter for Node.js version %s.', agentVersion);
+var agentDescription = 'ACDP Submitter for Node.js version ' + agentVersion;
+logger.info('Starting ' + agentDescription);
 
 logger.debug(
     'Loading ACDP-Submitter from %s',
@@ -27,6 +28,7 @@ var uuid = require('node-uuid');
 if (config.get('application:instanceid:random')) {
     config.set('application:instanceid:value', uuid.v4());
 }
+config.set('submitter:version', agentDescription);
 
 
 logger.trace("CONFIGURATION: " + JSON.stringify(config.get()));
@@ -244,6 +246,7 @@ var consumerParser = function (shorthand, callback) {
                 callback(err)
             } else {
                 var valid = false;
+
                 if (objects.IP && objects.PORT) {
                     valid = true;
                     var consObj = new Consumer();
@@ -270,7 +273,7 @@ var consumerParser = function (shorthand, callback) {
                     callback(null, consObj);
                 }
 
-                if(!valid) callback(new Error("No allowed shorthand notation"));
+                if (!valid) callback(new Error("No allowed shorthand notation"));
             }
 
         });

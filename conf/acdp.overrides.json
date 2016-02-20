@@ -4,6 +4,11 @@
       "config": {
         "dstPort": "42000"
       }
+    },
+    "global": {
+      "timing": {
+        "maxDelayMs": 86400000
+      }
     }
   }
 }

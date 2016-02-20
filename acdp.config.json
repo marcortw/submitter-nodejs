@@ -1,7 +1,4 @@
 {
-  "submitter": {
-    "version": "Node.js ACDP submitter agent ALPHA 0.0.1"
-  },
   "application": {
     "name": "Your application's name",
     "version": "Your application's version",
@@ -40,7 +37,6 @@
     "global": {
       "timing": {
         "minDelayMs": 3000,
-        "maxDelayMs": 86400000,
         "randomizationFactor": 0.5
       }
     }

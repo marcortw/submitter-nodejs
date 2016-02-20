@@ -1,6 +1,6 @@
 {
   "submitter": {
-    "version": "Node.js ACDP submitter agent ALPHA 0.0.1"
+    "version": "Node.js ACDP submitter"
   },
   "application": {
     "description": "Your application's description",
