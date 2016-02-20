@@ -3,6 +3,8 @@
     "version": "Node.js ACDP submitter agent ALPHA 0.0.1"
   },
   "application": {
+    "name": "Your application's name",
+    "version": "Your application's version",
     "description": "Your application's description",
     "applicationid": {
       "value": "Your unique application ID goes here",
