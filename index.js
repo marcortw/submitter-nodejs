@@ -33,11 +33,24 @@ config.set('submitter:version', agentDescription);
 
 logger.trace("CONFIGURATION: " + JSON.stringify(config.get()));
 
-// TODO: Load manual demands at startup (?)
+var rawDemands = function (rawDemands, callback) {
+    if (rawDemands.constructor === Array) {
+        rawDemandStarter(rawDemands, function (err, result) {
+            if (err) {
+                logger.error(err);
+                if (callback) callback(err, null);
+            } else {
+                if (callback) callback(null, result);
+            }
+        })
+    } else {
+        if (callback) callback('Supplied data is not an array.', null);
+    }
+};
 
 var produce = function (acdpShorthands, callback) {
     if (typeof acdpShorthands === 'object' && acdpShorthands !== null) {
-        starter(acdpShorthands, producerParser, function (err, result) {
+        shorthandStarter(acdpShorthands, producerParser, function (err, result) {
             if (err) {
                 logger.error(err);
                 if (callback) callback(err, null);
@@ -50,7 +63,7 @@ var produce = function (acdpShorthands, callback) {
 
 var consume = function (acdpShorthands, callback) {
     if (typeof acdpShorthands === 'object' && acdpShorthands !== null) {
-        starter(acdpShorthands, consumerParser, function (err, result) {
+        shorthandStarter(acdpShorthands, consumerParser, function (err, result) {
             if (err) {
                 logger.error(err);
                 if (callback) callback(err, null);
@@ -61,7 +74,23 @@ var consume = function (acdpShorthands, callback) {
     }
 };
 
-var starter = function (acdpShorthands, parser, callback) {
+var rawDemandStarter = function (demands, callback) {
+    var reqObj = new Request();
+    demands.forEach(function (item) {
+        reqObj.addDemand(item);
+    });
+
+    reqObj.validateAndSend(function (err, result) {
+        if (err) {
+            if (callback) callback(err, null);
+        } else {
+            if (callback) callback(null, result);
+        }
+    })
+};
+
+
+var shorthandStarter = function (acdpShorthands, parser, callback) {
     var reqObj = new Request();
 
     if (acdpShorthands.constructor === Array) {
@@ -272,6 +301,7 @@ var consumerParser = function (shorthand, callback) {
                     consObj.addProducer(objects.APP.l7ep);
                     callback(null, consObj);
                 }
+                // TODO: implement {"tcp":443, "from": {"app": "App-with-some-name"}}
 
                 if (!valid) callback(new Error("No allowed shorthand notation"));
             }
@@ -410,5 +440,6 @@ var resolveShorthand = function (result, callback) {
 
 module.exports = {
     produce: produce,
-    consume: consume
+    consume: consume,
+    rawDemands: rawDemands
 };
