@@ -11,6 +11,7 @@ logger.debug(
 
 
 var async = require('async');
+var uuid = require('node-uuid');
 var constants = require('./lib/constants');
 
 var Request = require('./lib/model/Request.js');
@@ -21,7 +22,7 @@ var L3ep = require('./lib/model/NetworkEndpoint');
 var L4ep = require('./lib/model/TransportEndpoint');
 var L7ep = require('./lib/model/ApplicationEndpoint');
 var config = require('./lib/configloader');
-var uuid = require('node-uuid');
+var crypto = require('./lib/crypto');
 
 
 // some config variables which need to be set at startup
@@ -30,9 +31,46 @@ if (config.get('application:instanceid:random')) {
 }
 config.set('submitter:version', agentDescription);
 
+// user supplied config, e.g. jwe key
+var initialized = false;
 
-logger.trace("CONFIGURATION: " + JSON.stringify(config.get()));
+/**
+ *
+ * @param options
+ * @param callback
+ * @returns {*}
+ */
+var init = function (options, callback) {
+    var retMsg = "";
+    if (!initialized) {
+        if (options.key) {
+            try {
+                var key = JSON.stringify(options.key);
+                config.set('encryption:jwekey', key);
+                retMsg += 'Supplied key has been added to the configuration. '
+            } catch (e) {
+                var errMsg = 'Supplied key is not a valid JSON structure.';
+                logger.error(e);
+                return new Error(errMsg)
+            }
+        }
+        logger.trace("CONFIGURATION AFTER USER-INIT: " + JSON.stringify(config.get()));
+        return retMsg;
 
+    } else {
+        var msg = 'User-supplied config has already been initialized!!';
+        logger.error(msg);
+        return new Error(msg);
+    }
+};
+
+logger.trace("FILE-BASED CONFIGURATION: " + JSON.stringify(config.get()));
+
+/**
+ * Takes an array of demands and starts sending them
+ * @param {Array} rawDemands
+ * @param callback
+ */
 var rawDemands = function (rawDemands, callback) {
     if (rawDemands.constructor === Array) {
         rawDemandStarter(rawDemands, function (err, result) {
@@ -44,7 +82,7 @@ var rawDemands = function (rawDemands, callback) {
             }
         })
     } else {
-        if (callback) callback('Supplied data is not an array.', null);
+        if (callback) callback(new Error('Supplied data is not an array.'), null);
     }
 };
 
@@ -439,6 +477,7 @@ var resolveShorthand = function (result, callback) {
 };
 
 module.exports = {
+    init: init,
     produce: produce,
     consume: consume,
     rawDemands: rawDemands

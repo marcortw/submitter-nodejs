@@ -14,6 +14,7 @@
     "debug": "^2.2.0",
     "dnscache": "0.0.4",
     "nconf": "^0.8.2",
+    "node-jose": "^0.7.1",
     "node-uuid": "^1.4.7",
     "random-js": "^1.0.8",
     "requestify": "^0.1.17",
