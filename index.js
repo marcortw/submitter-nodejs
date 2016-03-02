@@ -41,30 +41,47 @@ var initialized = false;
  * @returns {*}
  */
 var init = function (options, callback) {
-    var retMsg = "";
-    if (!initialized) {
-        if (options.key) {
-            try {
-                var key = JSON.stringify(options.key);
-                config.set('encryption:jwekey', key);
-                retMsg += 'Supplied key has been added to the configuration. '
-            } catch (e) {
-                var errMsg = 'Supplied key is not a valid JSON structure.';
-                logger.error(e);
-                return new Error(errMsg)
-            }
-        }
-        logger.trace("CONFIGURATION AFTER USER-INIT: " + JSON.stringify(config.get()));
-        return retMsg;
+    var errors = [];
 
+    // do some sync stuff, fill errors[] if errors happen (may partially work)
+    if (!initialized) {
+        if (options) {
+            if (options.key) {
+                try {
+                    var key = JSON.stringify(options.key);
+                    config.set('encryption:jwekey', key);
+                    logger.debug('Supplied key has been added to the configuration.');
+                } catch (e) {
+                    var keyParsingError = new Error('Supplied key is not a valid JSON structure.');
+                    logger.error(keyParsingError);
+                    errors.push(keyParsingError);
+                }
+            }
+            //TODO other options
+        } else {
+            var noOptionsSuppliedError = new Error('No initialization options were supplied.');
+            logger.error(noOptionsSuppliedError);
+            errors.push(noOptionsSuppliedError);
+        }
     } else {
-        var msg = 'User-supplied config has already been initialized!!';
-        logger.error(msg);
-        return new Error(msg);
+        var noOptionsSuppliedError = new Error('User-supplied config has already been initialized!');
+        logger.error(noOptionsSuppliedError);
+        errors.push(noOptionsSuppliedError);
+    }
+
+    initialized = true;
+    if (errors.length > 0) {
+        logger.trace("CONFIGURATION AFTER USER-INIT: " + JSON.stringify(config.get()));
+        if (callback) callback(errors);
+        return errors;
+    } else {
+        logger.trace("CONFIGURATION AFTER USER-INIT: " + JSON.stringify(config.get()));
+        var okmsg = "everything went fine";
+        if (callback) callback(null, okmsg);
+        return okmsg;
     }
 };
 
-logger.trace("FILE-BASED CONFIGURATION: " + JSON.stringify(config.get()));
 
 /**
  * Takes an array of demands and starts sending them
@@ -340,6 +357,7 @@ var consumerParser = function (shorthand, callback) {
                     callback(null, consObj);
                 }
                 // TODO: implement {"tcp":443, "from": {"app": "App-with-some-name"}}
+                // TODO: implement {"tcp":443, "from": {"ip": "an IP address"}}
 
                 if (!valid) callback(new Error("No allowed shorthand notation"));
             }
